@@ -3,6 +3,7 @@ package lav.valentine.accountserver.service.impl;
 import lav.valentine.accountserver.entity.Account;
 import lav.valentine.accountserver.entity.Transaction;
 import lav.valentine.accountserver.exception.ext.AccountNotExistException;
+import lav.valentine.accountserver.exception.ext.InsufficientFundsException;
 import lav.valentine.accountserver.repository.AccountRepository;
 import lav.valentine.accountserver.repository.TransactionRepository;
 import lav.valentine.accountserver.service.AccountService;
@@ -17,6 +18,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final TransactionRepository transactionRepository;
     private final String accountException = "";
+    private final String insufficientFundsException = "";
 
     public AccountServiceImpl(AccountRepository accountRepository, TransactionRepository transactionRepository) {
         this.accountRepository = accountRepository;
@@ -40,7 +42,10 @@ public class AccountServiceImpl implements AccountService {
         transactionRepository.save(Transaction.builder()
                 .account(account).value(value).time(LocalDateTime.now()).build());
 
-        account.setBalance(account.getBalance() + value);
+        Long newBalance = account.getBalance() + value;
+        if (newBalance < 0) throw new InsufficientFundsException(insufficientFundsException);
+
+        account.setBalance(newBalance);
 
         accountRepository.save(account);
     }
