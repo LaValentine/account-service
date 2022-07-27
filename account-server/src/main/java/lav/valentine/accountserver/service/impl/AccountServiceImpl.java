@@ -6,10 +6,12 @@ import lav.valentine.accountserver.exception.ext.AccountNotExistException;
 import lav.valentine.accountserver.repository.AccountRepository;
 import lav.valentine.accountserver.repository.TransactionRepository;
 import lav.valentine.accountserver.service.AccountService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
@@ -23,6 +25,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Long getAmount(Integer id) {
+        log.info("Getting balance. Account {}", id);
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new AccountNotExistException(accountException));
         return account.getBalance();
@@ -30,6 +33,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void addAmount(Integer id, Long value) {
+        log.info("Changing balance. Account {}", id);
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new AccountNotExistException(accountException));
 
