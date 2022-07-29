@@ -26,4 +26,9 @@ public class AccountController {
         accountService.addAmount(id, value);
         return new ResponseDto(String.format("The balance of account %d has been changed", id));
     }
+
+    @PostMapping("/statistic")
+    public ResponseDto resetStatistic() {
+        return new ResponseDto("Statistics reset");
+    }
 }

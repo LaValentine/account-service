@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <parameter name="hostname" value="localhost" />
+    <parameter name="port" value="8080" />
+
+    <parameter name="rCount" value="2" />
+    <parameter name="wCount" value="3" />
+    <parameter name="idList" value="1,2,5" />
+
+    <test name="/src/test/java/lav/valentine/accountclient/AccountServiceTest.java">
+        <classes>
+            <class name="lav.valentine.accountclient.AccountServiceTest">
+                <methods>
+                    <include name="testGettingAmount"/>
+                    <include name="testChangingAmount"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
