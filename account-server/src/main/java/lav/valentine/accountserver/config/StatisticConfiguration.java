@@ -13,7 +13,7 @@ import java.math.BigInteger;
 @Configuration
 @EnableAspectJAutoProxy
 @Aspect
-public class AopConfiguration {
+public class StatisticConfiguration {
     private BigInteger getAmount = BigInteger.ZERO;
     private BigInteger addAmount = BigInteger.ZERO;
     private BigInteger getAmountTotal = BigInteger.ZERO;
@@ -40,7 +40,7 @@ public class AopConfiguration {
         addAmountTotal = addAmountTotal.add(BigInteger.ONE);
     }
 
-    @Scheduled(fixedDelayString = "PT30S")
+    @Scheduled(fixedDelayString = "${statistic.time-interval}")
     public void monitorGetAmount() {
         log.info("Total requests getAmount per 30 seconds = " + getAmount.toString());
         log.info("Total requests addAmount per 30 seconds = " + addAmount.toString());

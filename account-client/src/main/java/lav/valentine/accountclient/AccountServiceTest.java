@@ -1,14 +1,19 @@
 package lav.valentine.accountclient;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.text.MatchesPattern;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.text.MatchesPattern.matchesPattern;
 
 public class AccountServiceTest {
 
@@ -43,10 +48,10 @@ public class AccountServiceTest {
     }
 
     private Object[] read(int readers) {
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = new ArrayList<>(idList);
 
         while (list.size() <= readers) {
-            list.addAll(idList);
+            list.addAll(list);
         }
         return list.stream().limit(readers).toArray();
     }
@@ -66,7 +71,7 @@ public class AccountServiceTest {
             restTemplate.postForObject(url, null, String.class);
         }
         catch (HttpClientErrorException ex) {
-            assertThat(ex.getMessage(), matchesPattern("400.+"));
+            MatcherAssert.assertThat(ex.getMessage(), MatchesPattern.matchesPattern("400.+"));
         }
     }
 }
