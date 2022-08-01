@@ -49,15 +49,25 @@
 ШАГ #2
 
   ```
-    docker build -t lavalentine/account-server .
+    cd account-server
   ```
 ШАГ #3
+
+  ```
+    docker build -t lavalentine/account-server .
+  ```
+ШАГ #4
 
   ```
     docker run --name account-server -p 8080:8080 -e DATASOURCE_HOST=host.docker.internal lavalentine/account-server
   ```
 ## Или
 ШАГ #1
+
+  ```
+    cd account-server
+  ```
+ШАГ #2
 
   ```
     docker compose up
@@ -131,7 +141,7 @@ id | balance
 ...
     <parameter name="rCount" value="20" />
     <parameter name="wCount" value="1" />
-    <parameter name="idList" value="1,2,5" />
+    <parameter name="idList" value="1,2,3,4,5,6,7,8,9,10" />
 ...
 ```
 ШАГ #3
