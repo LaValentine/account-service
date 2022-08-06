@@ -27,6 +27,9 @@
     <logger name="lav.valentine.accountserver" level="DEBUG">
         <appender-ref ref="FILE1" />
     </logger>
+    <logger name="org.springframework.cache" level="trace">
+        <appender-ref ref="FILE1" />
+    </logger>
 
     <root level="WARN">
         <appender-ref ref="STDOUT" />

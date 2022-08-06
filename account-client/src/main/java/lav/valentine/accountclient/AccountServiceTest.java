@@ -59,7 +59,12 @@ public class AccountServiceTest {
     @Test(dataProvider = "getting-amount")
     public void testGettingAmount(int number) {
         String url = String.format("http://%s:%s/api/%d/amount/", hostname, port, number);
-        restTemplate.getForObject(url, String.class);
+        try {
+            restTemplate.getForObject(url, String.class);
+        }
+        catch (HttpClientErrorException ex) {
+            MatcherAssert.assertThat(ex.getMessage(), MatchesPattern.matchesPattern("400.+"));
+        }
     }
 
     @Test(dataProvider = "changing-amount")
