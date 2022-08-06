@@ -127,6 +127,36 @@ id | balance
 ## Запуск тестового клиента
 ШАГ #1
   ```
+    mvn  -f ./account-test-client package -DskipTests
+  ```
+ШАГ #2
+
+Настройте файл `account-test-client/test-client-settings.xml`
+
+Установите необходимые значения параметров
+
+Пример
+
+```
+    <Settings>
+        <rCount>2</rCount>
+        <wCount>3</wCount>
+        <idList>
+            <id>1</id>
+            <id>2</id>
+            <id>3</id>
+            <id>4</id>
+            <id>5</id>
+        </idList>
+    </Settings>
+```
+ШАГ #3
+  ```
+    java -jar ./account-test-client/target/account-test-client-0.0.1-SNAPSHOT.jar
+  ```
+## Запуск тестового клиента, реализованного с помощью TestNG
+ШАГ #1
+  ```
     mvn  -f ./account-client package -DskipTests
   ```
 ШАГ #2
